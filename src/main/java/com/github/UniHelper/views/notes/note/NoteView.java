@@ -11,17 +11,17 @@ public interface NoteView {
 
     void addOnNoteDeletedCommand(Command command);
 
-    void setNoteTitle(String title);
-
     String getNoteTitle();
 
-    void setNoteText(String text);
+    void setNoteTitle(String title);
 
     String getNoteText();
 
-    void setColor(Color color);
+    void setNoteText(String text);
 
     Color getColor();
+
+    void setColor(Color color);
 
     UUID getId();
 

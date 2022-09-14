@@ -7,8 +7,6 @@ public interface CategoriesModel {
 
     void addCategory(Category category);
 
-    void updateCategory(Category oldCategory, Category newCategory);
-
     void updateCategoryById(UUID id, Category category);
 
     void deleteCategory(Category category);

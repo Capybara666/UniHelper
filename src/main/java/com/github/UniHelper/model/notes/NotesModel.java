@@ -9,8 +9,6 @@ public interface NotesModel {
 
     void deleteNote(Note note);
 
-    void updateNote(Note oldNote, Note newNote);
-
     void updateNoteById(UUID id, Note note);
 
     ArrayList<Note> getAllNotes();

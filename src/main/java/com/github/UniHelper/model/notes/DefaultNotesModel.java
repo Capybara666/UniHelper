@@ -46,20 +46,6 @@ public class DefaultNotesModel implements NotesModel {
     }
 
     @Override
-    public void updateNote(Note oldNote, Note newNote) {
-        Note note = notes.stream()
-                .filter(n -> n.equals(oldNote))
-                .findFirst()
-                .orElse(null);
-        if (note != null) {
-            note.setTitle(newNote.getTitle());
-            note.setText(newNote.getText());
-            note.setCategory(newNote.getCategory());
-            save();
-        }
-    }
-
-    @Override
     public void setNotes(ArrayList<Note> notes) {
         this.notes = getDeepNotesCopy(notes);
         save();

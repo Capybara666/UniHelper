@@ -35,13 +35,13 @@ public class TextPanel extends JPanel {
         text.getDocument().addDocumentListener(documentListener);
     }
 
+    public Color getTextBackground() {
+        return text.getBackground();
+    }
+
     public void setTextBackground(Color color) {
         text.setBackground(color);
         scrollPane.getVerticalScrollBar().setBackground(color);
-    }
-
-    public Color getTextBackground() {
-        return text.getBackground();
     }
 
     public void setEditable(boolean editable) {

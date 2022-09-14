@@ -9,7 +9,7 @@ public class EditCategoryButton extends NamedButton {
 
     public EditCategoryButton() {
         super("Edit color");
-        setPreferredSize(new Dimension(150,62));
+        setPreferredSize(new Dimension(150, 62));
         setFont(new Font(Font.SANS_SERIF, Font.BOLD, 24));
         setBackground(Color.DARK_GRAY.darker().darker());
         setBorder(new LineBorder(Color.BLACK, 1));

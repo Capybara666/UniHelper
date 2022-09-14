@@ -71,18 +71,13 @@ public class DefaultEditedNoteView implements EditedNoteView {
     }
 
     @Override
-    public void setNoteTitle(String title) {
-        titlePanel.setTitle(title);
-    }
-
-    @Override
     public String getNoteTitle() {
         return titlePanel.getTitle();
     }
 
     @Override
-    public void setNoteText(String text) {
-        textPanel.setText(text);
+    public void setNoteTitle(String title) {
+        titlePanel.setTitle(title);
     }
 
     @Override
@@ -91,14 +86,19 @@ public class DefaultEditedNoteView implements EditedNoteView {
     }
 
     @Override
-    public void setColor(Color color) {
-        titlePanel.setTitleBackground(color.darker().darker());
-        textPanel.setTextBackground(color);
+    public void setNoteText(String text) {
+        textPanel.setText(text);
     }
 
     @Override
     public Color getColor() {
         return textPanel.getTextBackground();
+    }
+
+    @Override
+    public void setColor(Color color) {
+        titlePanel.setTitleBackground(color.darker().darker());
+        textPanel.setTextBackground(color);
     }
 
     private void assembleView() {

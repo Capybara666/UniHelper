@@ -5,7 +5,6 @@ import com.github.UniHelper.presenters.commands.Command;
 import com.github.UniHelper.views.utils.RadioButton;
 import com.github.UniHelper.views.utils.RadioButtonBundle;
 import lombok.Getter;
-import lombok.Setter;
 
 import javax.swing.*;
 import java.awt.*;
@@ -51,7 +50,7 @@ public class CategorySelectorPanel extends JPanel {
         activeCategory = category;
         updateButtons();
         executeOnCategoryChangedCommands();
-        if(activeCategory != null) {
+        if (activeCategory != null) {
             editCategoryButton.setEnabled(true);
         }
     }
@@ -101,7 +100,7 @@ public class CategorySelectorPanel extends JPanel {
 
     private void editCategory() {
         Color newColor = getColorFromUser();
-        if(newColor != null) {
+        if (newColor != null) {
             modifiedCategoryColor = newColor;
             activeCategory.setColor(newColor);
             executeOnCategoryModifiedCommands();
@@ -118,7 +117,7 @@ public class CategorySelectorPanel extends JPanel {
 
     private void updateButtons() {
         this.removeAll();
-        if(allCategoriesButtonVisible) {
+        if (allCategoriesButtonVisible) {
             add(allCategoriesButton);
         }
         createNewButtons();
@@ -129,7 +128,7 @@ public class CategorySelectorPanel extends JPanel {
     }
 
     private void reactivateButtonWithActiveCategory() {
-        if(activeCategory == null && allCategoriesButtonVisible) {
+        if (activeCategory == null && allCategoriesButtonVisible) {
             radioButtonBundle.setActiveButton(allCategoriesButton);
         }
         selectorButtons.stream()
@@ -143,7 +142,7 @@ public class CategorySelectorPanel extends JPanel {
         selectorButtons = categories.stream()
                 .map(CategorySelectorButton::new)
                 .collect(Collectors.toCollection(ArrayList::new));
-        if(allCategoriesButtonVisible) {
+        if (allCategoriesButtonVisible) {
             selectorButtons.add(0, allCategoriesButton);
         }
         radioButtonBundle.setButtons(selectorButtons);

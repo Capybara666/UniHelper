@@ -36,7 +36,7 @@ public class RadioButtonBundle implements RadioButtonListener {
 
     private void initializeButtonsState() {
         activeButton = null;
-        for(RadioButton rb : buttons) {
+        for (RadioButton rb : buttons) {
             rb.setActive(false);
             rb.addListener(this);
         }
@@ -48,7 +48,7 @@ public class RadioButtonBundle implements RadioButtonListener {
     }
 
     private void executeOnActiveButtonChangedCommands() {
-        for(Command c : onActiveButtonChangedCommands) {
+        for (Command c : onActiveButtonChangedCommands) {
             c.execute();
         }
     }
@@ -56,8 +56,8 @@ public class RadioButtonBundle implements RadioButtonListener {
     public void setActiveButton(RadioButton button) {
         button.setActive(true);
         activeButton = button;
-        for(RadioButton rb : buttons) {
-            if(rb != button) {
+        for (RadioButton rb : buttons) {
+            if (rb != button) {
                 rb.setActive(false);
             }
         }

@@ -102,7 +102,25 @@ public class DefaultCategoriesModelTest {
     }
 
     @Test
-    void updateCategoryById_should_override_existing_category_values() {
+    void updateCategoryById_should_do_not_modify_model_if_Id_is_not_present() {
+        // Given
+        Category c1 = new Category("n1", Color.WHITE);
+        Category c2 = new Category("n2", Color.RED);
+        ArrayList<Category> givenCategories = new ArrayList<>();
+        givenCategories.add(c1);
+        categoriesModel.setCategories(givenCategories);
+
+        // When
+        categoriesModel.updateCategoryById(c2.getId(), c1);
+        categoriesModel.updateCategoryById(c2.getId(), c2);
+        ArrayList<Category> returnedCategories = categoriesModel.getAllCategories();
+
+        // Then
+        Assertions.assertEquals(givenCategories, returnedCategories);
+    }
+
+    @Test
+    void updateCategoryById_should_overwrite_existing_category_value() {
         // Given
         Category c1 = new Category("n1", Color.WHITE);
         Category c2 = new Category("n2", Color.RED);

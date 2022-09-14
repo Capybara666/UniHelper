@@ -54,8 +54,9 @@ public class DefaultPreviewNoteView implements PreviewNoteView {
     }
 
     @Override
-    public void setNoteTitle(String title) {
-        titlePanel.setTitle(title);
+    public void setColor(Color color) {
+        titlePanel.setTitleBackground(color.darker().darker());
+        textPanel.setTextBackground(color);
     }
 
     @Override
@@ -64,8 +65,8 @@ public class DefaultPreviewNoteView implements PreviewNoteView {
     }
 
     @Override
-    public void setNoteText(String text) {
-        textPanel.setText(text);
+    public void setNoteTitle(String title) {
+        titlePanel.setTitle(title);
     }
 
     @Override
@@ -74,9 +75,8 @@ public class DefaultPreviewNoteView implements PreviewNoteView {
     }
 
     @Override
-    public void setColor(Color color) {
-        titlePanel.setTitleBackground(color.darker().darker());
-        textPanel.setTextBackground(color);
+    public void setNoteText(String text) {
+        textPanel.setText(text);
     }
 
     private void assembleView() {

@@ -233,14 +233,14 @@ class DefaultNotesModelTest {
         Note note2 = new Note("t2", "d2", "c2");
         Note note3 = new Note("t3", "d3", "c3");
         notesModel.addNote(note1);
-        note1 = note3;
 
         // When
-        notesModel.updateNoteById(note1.getId(), note1);
+        notesModel.updateNoteById(note1.getId(), note3);
         note1 = note2;
 
         // Then
         ArrayList<Note> notes = notesModel.getAllNotes();
+        Assertions.assertFalse(notes.contains(note1));
         Assertions.assertFalse(notes.contains(note2));
         Assertions.assertTrue(notes.contains(note3));
     }

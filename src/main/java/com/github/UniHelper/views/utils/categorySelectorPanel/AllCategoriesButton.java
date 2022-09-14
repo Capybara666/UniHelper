@@ -8,7 +8,7 @@ import java.awt.*;
 public class AllCategoriesButton extends RadioButton {
 
     public AllCategoriesButton() {
-        setPreferredSize(new Dimension(120,62));
+        setPreferredSize(new Dimension(120, 62));
         FlowLayout fl = new FlowLayout();
         fl.setVgap(13);
         fl.setHgap(20);

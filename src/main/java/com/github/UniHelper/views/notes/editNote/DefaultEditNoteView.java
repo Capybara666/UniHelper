@@ -31,7 +31,7 @@ public class DefaultEditNoteView implements EditNoteView {
         editedNoteView = noteView;
         BorderLayout layout = (BorderLayout) mainPanel.getLayout();
         Component currentNote = layout.getLayoutComponent(BorderLayout.CENTER);
-        if(currentNote != null) {
+        if (currentNote != null) {
             mainPanel.remove(layout.getLayoutComponent(BorderLayout.CENTER));
         }
         mainPanel.add(noteView.getContainer(), BorderLayout.CENTER);

@@ -64,7 +64,7 @@ public class RadioButton extends JPanel {
 
             @Override
             public void mousePressed(final MouseEvent e) {
-                if(!active) {
+                if (!active) {
                     setActive(true);
                     notifyListeners();
                     setBackgroundOnMouseEvent(clickedColor);
@@ -88,11 +88,10 @@ public class RadioButton extends JPanel {
     }
 
     private void notifyListeners() {
-        for(RadioButtonListener rbl : listeners) {
-            if(rbl == null) {
+        for (RadioButtonListener rbl : listeners) {
+            if (rbl == null) {
                 listeners.remove(null);
-            }
-            else {
+            } else {
                 rbl.handleButtonEvent(this);
             }
         }

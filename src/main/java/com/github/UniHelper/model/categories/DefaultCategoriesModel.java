@@ -46,19 +46,6 @@ public class DefaultCategoriesModel implements CategoriesModel {
     }
 
     @Override
-    public void updateCategory(Category oldCategory, Category newCategory) {
-        Category category = categories.stream()
-                .filter(c -> c.equals(oldCategory))
-                .findFirst()
-                .orElse(null);
-        if (category != null) {
-            category.setName(newCategory.getName());
-            category.setColor(newCategory.getColor());
-            save();
-        }
-    }
-
-    @Override
     public void updateCategoryById(UUID id, Category category) {
         Category categoryWithSameId = categories.stream()
                 .filter(c -> c.getId().equals(id))

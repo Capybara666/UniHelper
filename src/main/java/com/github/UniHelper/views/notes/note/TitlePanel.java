@@ -16,12 +16,12 @@ public class TitlePanel extends JPanel {
         add(titleTextPane);
     }
 
-    public void setTitle(String title) {
-        titleTextPane.setText(title);
-    }
-
     public String getTitle() {
         return titleTextPane.getText();
+    }
+
+    public void setTitle(String title) {
+        titleTextPane.setText(title);
     }
 
     public void addTitleDocumentListener(DocumentListener documentListener) {
