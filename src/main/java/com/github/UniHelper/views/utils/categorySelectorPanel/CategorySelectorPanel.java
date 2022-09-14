@@ -5,6 +5,7 @@ import com.github.UniHelper.presenters.commands.Command;
 import com.github.UniHelper.views.utils.RadioButton;
 import com.github.UniHelper.views.utils.RadioButtonBundle;
 import lombok.Getter;
+import lombok.Setter;
 
 import javax.swing.*;
 import java.awt.*;
@@ -25,6 +26,7 @@ public class CategorySelectorPanel extends JPanel {
     private Color modifiedCategoryColor;
     private ArrayList<Category> categories;
     private ArrayList<RadioButton> selectorButtons;
+    private boolean allCategoriesButtonVisible;
 
     public CategorySelectorPanel() {
         super();
@@ -33,7 +35,9 @@ public class CategorySelectorPanel extends JPanel {
         radioButtonBundle = new RadioButtonBundle();
         editCategoryButton = new EditCategoryButton();
         allCategoriesButton = new AllCategoriesButton();
+        categories = new ArrayList<>();
         activeCategory = null;
+        allCategoriesButtonVisible = true;
         assembleView();
         setLook();
     }
@@ -43,8 +47,22 @@ public class CategorySelectorPanel extends JPanel {
         updateButtons();
     }
 
+    public void setActiveCategory(Category category) {
+        activeCategory = category;
+        updateButtons();
+        executeOnCategoryChangedCommands();
+        if(activeCategory != null) {
+            editCategoryButton.setEnabled(true);
+        }
+    }
+
     public void addOnCategoryModifiedCommand(Command command) {
         onCategoryModifiedCommands.add(command);
+    }
+
+    public void setAllCategoriesButtonVisible(boolean visible) {
+        allCategoriesButtonVisible = visible;
+        updateButtons();
     }
 
     private void assembleView() {
@@ -100,7 +118,9 @@ public class CategorySelectorPanel extends JPanel {
 
     private void updateButtons() {
         this.removeAll();
-        add(allCategoriesButton);
+        if(allCategoriesButtonVisible) {
+            add(allCategoriesButton);
+        }
         createNewButtons();
         reactivateButtonWithActiveCategory();
         add(editCategoryButton);
@@ -109,6 +129,9 @@ public class CategorySelectorPanel extends JPanel {
     }
 
     private void reactivateButtonWithActiveCategory() {
+        if(activeCategory == null && allCategoriesButtonVisible) {
+            radioButtonBundle.setActiveButton(allCategoriesButton);
+        }
         selectorButtons.stream()
                 .filter(rb -> rb != allCategoriesButton)
                 .map(rb -> (CategorySelectorButton) rb)
@@ -120,7 +143,9 @@ public class CategorySelectorPanel extends JPanel {
         selectorButtons = categories.stream()
                 .map(CategorySelectorButton::new)
                 .collect(Collectors.toCollection(ArrayList::new));
-        selectorButtons.add(0, allCategoriesButton);
+        if(allCategoriesButtonVisible) {
+            selectorButtons.add(0, allCategoriesButton);
+        }
         radioButtonBundle.setButtons(selectorButtons);
         for (RadioButton rb : selectorButtons) {
             add(rb);

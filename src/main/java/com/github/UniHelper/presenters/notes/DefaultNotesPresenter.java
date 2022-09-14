@@ -1,7 +1,11 @@
 package com.github.UniHelper.presenters.notes;
 
+import com.github.UniHelper.model.categories.Category;
+import com.github.UniHelper.model.categories.DefaultCategoriesModel;
 import com.github.UniHelper.model.notes.DefaultNotesModel;
 import com.github.UniHelper.model.notes.Note;
+import com.github.UniHelper.presenters.notes.editNote.DefaultEditNotePresenter;
+import com.github.UniHelper.presenters.notes.editNote.EditNotePresenter;
 import com.github.UniHelper.presenters.notes.note.editedNote.DefaultEditedNotePresenter;
 import com.github.UniHelper.presenters.notes.note.editedNote.EditedNotePresenter;
 import com.github.UniHelper.presenters.notes.showNotes.DefaultShowNotesPresenter;
@@ -19,6 +23,7 @@ import java.util.UUID;
 public class DefaultNotesPresenter implements NotesPresenter {
 
     private final NotesView view;
+    private final EditNoteView editNoteView;
 
     public DefaultNotesPresenter(NotesView notesView) {
         view = notesView;
@@ -27,6 +32,10 @@ public class DefaultNotesPresenter implements NotesPresenter {
         view.addOnNoteEditRequestedCommand(this::showEditView);
         view.addOnNoteEditFinishedCommand(this::showPreviewsView);
         view.setShowNotesView(showNotesView);
+
+        editNoteView = new DefaultEditNoteView();
+        EditNotePresenter editNotePresenter = new DefaultEditNotePresenter(editNoteView);
+        view.setEditNoteView(editNoteView);
     }
 
     private void showPreviewsView() {
@@ -34,12 +43,11 @@ public class DefaultNotesPresenter implements NotesPresenter {
     }
 
     private void showEditView() {
-        EditNoteView editNoteView = new DefaultEditNoteView();
         EditedNoteView editedNoteView = new DefaultEditedNoteView(view.getNoteToEdit());
         Note editedNote = getEditedNote();
         EditedNotePresenter editedNotePresenter = new DefaultEditedNotePresenter(editedNoteView, editedNote);
         editNoteView.setNoteView(editedNoteView);
-        view.setEditNoteView(editNoteView);
+        editNoteView.setCategorySelectorPanelActiveCategory(getNoteCategory(editedNote));
         view.showEditNoteView();
     }
 
@@ -48,6 +56,14 @@ public class DefaultNotesPresenter implements NotesPresenter {
         return DefaultNotesModel.getInstance().getAllNotes()
                 .stream()
                 .filter(n -> n.getId().equals(editedNoteId))
+                .findFirst()
+                .orElse(null);
+    }
+
+    private Category getNoteCategory(Note note) {
+        return DefaultCategoriesModel.getInstance().getAllCategories()
+                .stream()
+                .filter(c -> c.getName().equals(note.getCategory()))
                 .findFirst()
                 .orElse(null);
     }

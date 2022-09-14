@@ -51,7 +51,7 @@ public class DefaultEditedNotePresenter implements EditedNotePresenter {
         note.setTitle(view.getNoteTitle());
         note.setText(view.getNoteText());
         note.setCategory(getCategory(view.getColor()).getName());
-        model.updateNote(oldNote, note);
+        model.updateNoteById(view.getId(), note);
     }
 
     private Category getCategory(Color color) {
